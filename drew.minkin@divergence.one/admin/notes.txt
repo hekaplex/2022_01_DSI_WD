@@ -1,0 +1,10 @@
+Ryan        DS      DP-100  DL
+Kevin       DS      DP-100  DL
+Matthew     DS      DP-100
+Alex        DA      DA-100
+Alessandra  DA      AZ-900
+Chase       AAD/DA  TBD
+Trima       AAD/DA  TBD
+David       AAD/DS              
+Benny       DA/DS           DL     
+Danny       
