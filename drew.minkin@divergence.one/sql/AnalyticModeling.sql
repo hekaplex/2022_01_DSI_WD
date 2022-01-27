@@ -13,7 +13,7 @@ DML - Data Manipulation Language
 	DELETE
 	UPDATE - INSERT/DELETE
 	SELECT ... INTO
-
+	MERGE
 
 Data Analysis
 =============
@@ -110,6 +110,8 @@ select * from SchedulableClasses
 What department has no classes on the schedule?
 --Political Science
 */
+
+--similar logic to MERGE..WHEN NOT MATCHED ( insert case)
 SELECT
 		d.DepartmentName
 	FROM
@@ -155,10 +157,11 @@ AS
 		d.DepartmentName
 	ORDER BY
 		--positional, column name or aggregate calc
-		--sum(sc.StudentID)
+		--count(sc.StudentID)
 		3
 		DESC
 
+		SELECT * from EnrollmentBase
 --percentage
 With te
 AS
@@ -187,27 +190,37 @@ what students are full time vs part time?
 	what $ each department contributes
 	*/
 --student enrollment
-CREATE VIEW EnrollmentDistribution
+ALTER VIEW EnrollmentDistribution
 AS
 	WITH QtyEnrollBase
 	AS
 	(
 	SELECT
-			sc.StudentID
+			s.EnrollmentStatus
+			,sc.StudentID
 			,COUNT(*) QtyEnrollments
 		FROM
 			[dbo].[StudentCourses] sc
+		JOIN
+			dbo.Students s
+		ON sc.StudentID = s.StudentID
 		GROUP BY
-			sc.StudentID
+			s.EnrollmentStatus
+			,sc.StudentID
 	)
 	SELECT
-		QtyEnrollments,
-		COUNT(*) NumStudents
+		EnrollmentStatus
+		,QtyEnrollments
+		,COUNT(*) NumStudents
 	FROM
 		QtyEnrollBase
 	GROUP BY 
-		QtyEnrollments
+		EnrollmentStatus
+		,QtyEnrollments
 	--Part Time - QtyEnrollments = 2 or 3
+
+SELECT * FROM EnrollmentDistribution
+
 CREATE VIEW StudentEnrollment
 AS
 WITH QtyEnrollBase
@@ -234,6 +247,7 @@ SELECT
 FROM
 	QtyEnrollBase
 
+select * from StudentEnrollment
 
 ALTER TABLE Students ADD EnrollmentStatus varchar(20)
 
@@ -261,7 +275,6 @@ SELECT * FROM Tuition
 Contribution per Student 
 :)		 Allocation of Enrollment Cost  Per Course (PT) 
 :)		+Allocation of Enrollment Cost  Per Course (FT)
-
 :)		+Per Course Cost (PerUnitCost * CourseUnits)
 */
 
@@ -304,6 +317,7 @@ AS
 			,d.DepartmentName ASC
 			,TotalUnits DESC
 
+select * FROM EnrollmentBaseContribution
 /*
 Department
 TotalContribution
@@ -400,6 +414,9 @@ WITH
 			, totalcontrib t
 		order by 
 		PctContribution DESC
+
+select * from DepartmentTotalContribution
+
 /*
 Instructor Net Cost
 = AnnualSalary - InstructorDeptContribution
@@ -442,6 +459,8 @@ GROUP BY
 	+i.LastName
 	,d.DepartmentName
 
+select * from InstructorNumUnits
+
 CREATE VIEW InstructorContribution
 AS
 WITH agg
@@ -474,6 +493,8 @@ Salary
 Contribution
 % of Salary Covered by Tuition
 */
+
+
 SELECT
 TOP 100 PERCENT
 ic.Instructor
@@ -495,7 +516,7 @@ on 	i.FirstName
 = ic.Instructor
 order by PctSalaryCovered Desc
 
-
+select * from InstructorContribution
 
 /****** Object:  Table [dbo].[Courses]    Script Date: 11/10/2021 9:05:03 AM ******/
 SET ANSI_NULLS ON
