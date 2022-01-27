@@ -19,7 +19,7 @@
 
 2. Launch multi-chain DeFi application :tm:
 
-3. Data Science  :shipit:
+3. ~~Data Science~~  :brain: Artificial Intelligence
 
 4. At this moment, I am committed to implementing Computer Vision into the capstone via the OpenCV library. It is my hope to one day soon work remotely for a company such as Tesla (Autopilot) or Comma.ai (OpenPilot). If I should fail, I will concurrently build a lean backup project based upon Predictive Analytics.
 
