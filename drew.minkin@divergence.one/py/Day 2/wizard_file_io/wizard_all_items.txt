@@ -1,9 +1,3 @@
-a wooden staff
-a wizard hat
-a cloak of invisibility
-some elven bread
-an unknown potion
-a scroll of uncursing
-a scroll of invisibility
-a crossbow
-a wizard's cloak
+version https://git-lfs.github.com/spec/v1
+oid sha256:771e674af802fc3dbb6495b846993e1ca0d8b553c25bd170212c9bd8ed63e6c7
+size 171
