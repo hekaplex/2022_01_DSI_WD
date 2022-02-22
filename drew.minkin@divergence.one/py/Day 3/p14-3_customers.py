@@ -33,7 +33,7 @@ class Customer:
     
 import csv
 
-FILENAME = "customers.csv"
+FILENAME = "C:\\2022_01_DSI_WD\\drew.minkin@divergence.one\\py\\Day 3\\customers.csv"
 
 def get_customers():
     with open(FILENAME, "r", newline='') as file:
