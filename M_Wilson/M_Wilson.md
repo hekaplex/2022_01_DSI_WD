@@ -24,9 +24,5 @@
 4. At this moment, I am committed to implementing Computer Vision into the capstone via the OpenCV library. It is my hope to one day soon work remotely for a company such as Tesla (Autopilot) or Comma.ai (OpenPilot). The repo for this project may be found here: https://github.com/BasiliskOps/cv.laneDetect
 
 ```
-Obstacle Analysis: In learning to implement OpenCV lane detection for this capstone, 
-I am currently at odds with the cv2.waitkey(wait time in milliseconds) function within the OpenCV library. 
-I believe the dilemma may however be remedied via passing '0' into the argument --> ()... 
-Allowing the frames to be displayed for an infinite amount of time. 
-The next step therein is to implement a loop through the frame.
+## *Obstacle Analysis:* Currently implementing Hough Transform. 
 ```
