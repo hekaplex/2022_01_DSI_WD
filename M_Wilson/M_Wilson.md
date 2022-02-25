@@ -23,6 +23,6 @@
 
 4. At this moment, I am committed to implementing Computer Vision into the capstone via the OpenCV library. It is my hope to one day soon work remotely for a company such as Tesla (Autopilot) or Comma.ai (OpenPilot). The repo for this project may be found here: https://github.com/BasiliskOps/cv.laneDetect
 
-```
+
 ## *Obstacle Analysis:* Currently implementing Hough Transform. 
-```
+
