@@ -1,8 +1,9 @@
 #Troubleshooting OS Error
 #Working Copy  2022-02-25 0900AM
-#pip install BeautifulSoup as b  & #pip install requests
+#pip install BeautifulSoup4
 
 from bs4 import BeautifulSoup as b
+#import beautifulsoup4 as b
 import numpy as np
 import requests as r
 import pandas as p
