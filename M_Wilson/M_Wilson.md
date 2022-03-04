@@ -26,7 +26,9 @@
 ## *Obstacle Analysis:* Currently implementing Hough Line Transform. 
 
 ```
-According to the Hough transform algorithm the image needs to be converted to ‘GRAY’ colorspace and sent for edge detection for which we use Canny function. Since the hough function returns an array of multiple subarrays, in order to loop through them I will initiate a for a loop
+According to the Hough transform algorithm the image needs to be converted to ‘GRAY’ colorspace...
+and sent for edge detection for which we use Canny function. 
+Since the hough function returns an array of multiple subarrays, in order to loop through them I will initiate a for a loop
 
 image: Image src rho: Distance resolution of the accumulator (distance from the coordinate origin in the hough space)
 theta: Angle resolution of the accumulator(Line rotation in radians)
