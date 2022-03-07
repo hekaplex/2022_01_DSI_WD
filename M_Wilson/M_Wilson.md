@@ -22,7 +22,7 @@
 
 3. ~~Data Science~~  :brain: Artificial Intelligence
 
-4. At this moment, I am committed to implementing Computer Vision into the capstone via the OpenCV library. It is my hope to one day soon work remotely for a company such as Tesla (Autopilot) or Comma.ai (OpenPilot). AUSTIN OR BUST!! :airplane:
+4. ~~At this moment, I am committed to implementing Computer Vision into the capstone via the OpenCV library. It is my hope to one day soon work remotely for a company such as Tesla (Autopilot) or Comma.ai (OpenPilot).~~ ESCAPE THY MATRIX!! ❤️‍🔥 
 
 
 ## *Obstacle Analysis:* Currently implementing Hough Line Transform. 
@@ -53,3 +53,4 @@ Meaning that any shadow cast within the feed potentially obscures the lane space
 That said, I have taken it upon myself to build a secondary capstone... 
 to showcase my true capabilities and defeat the gatekeepers: Project ONUS
 ```
+## The repo for this project may be found here: https://github.com/BasiliskOps/ONUS
