@@ -37,3 +37,4 @@ minLineLength: Line segments shorter than this value are rejected
 maxLineGap: Max allowd gap between line segments to treat them as a single line
 ```
 The repo for this project may be found here: https://github.com/BasiliskOps/cv.laneDetect
+---
