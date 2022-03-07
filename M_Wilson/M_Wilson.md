@@ -22,7 +22,7 @@
 
 3. ~~Data Science~~  :brain: Artificial Intelligence
 
-4. ~~At this moment, I am committed to implementing Computer Vision into the capstone via the OpenCV library. It is my hope to one day soon work remotely for a company such as Tesla (Autopilot) or Comma.ai (OpenPilot).~~ ESCAPE THY MATRIX!! ❤️‍🔥 
+4. ~~At this moment, I am committed to implementing Computer Vision into the capstone via the OpenCV library. It is my hope to one day soon work remotely for a company such as Tesla (Autopilot) or Comma.ai (OpenPilot).~~ ❤️‍🔥 ESCAPE THY MATRIX!! ❤️‍🔥 
 
 
 ## *Obstacle Analysis:* Currently implementing Hough Line Transform. 
