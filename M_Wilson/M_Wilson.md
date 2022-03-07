@@ -44,5 +44,12 @@ The repo for this project may be found here: https://github.com/BasiliskOps/cv.l
 # *HAIL MARY* 
 
 ```
-Upon researching the current state of computer vision within the domain of lane detection... I discovered a host of Tesla owners who have noticed a frightening dilemma called "phantom braking". While the issue is currently under investigation, I would wager that this issue is caused from shadows cast over the roadway. Thus, the code underpinning the Tesla Autopilot is detecting obstacles which aren't there... as the video feed is converted to 'GRAY' colorspace which renders each frame black. Meaning that any shadow cast within the feed potentially obscures the lane space as ordained by the Autopilot system. Quite a critical vulnerability and suggests autonomous driving is still in it's infancy... and my interest has been lessened. That said, I have taken it upon myself to build a secondary capstone... to showcase my true capabilities and defeat the gatekeepers: Project ONUS
+Upon researching the current state of computer vision within the domain of lane detection... 
+I discovered a host of Tesla owners who have noticed a frightening dilemma called "phantom braking". 
+While the issue is currently under investigation, I would wager that this issue is caused from shadows cast over the roadway. 
+Thus, the code underpinning the Tesla Autopilot is detecting obstacles which aren't there... 
+as the video feed is converted to 'GRAY' colorspace which renders each frame black. 
+Meaning that any shadow cast within the feed potentially obscures the lane space as ordained by the Autopilot system. Quite a critical vulnerability and suggests autonomous driving is still in it's infancy... and my interest has been lessened. 
+That said, I have taken it upon myself to build a secondary capstone... 
+to showcase my true capabilities and defeat the gatekeepers: Project ONUS
 ```
