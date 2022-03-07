@@ -13,7 +13,7 @@
 ```
 :trollface: :trollface: :trollface: :trollface: :trollface: :trollface: 
 ---
----
+
 1. Achieve complete self-sufficiency as a digital nomad. :computer: :airplane: :earth_asia:
 
 2. Begin receiving royalties for NFT collection & Launch multi-chain DeFi application :tm:
