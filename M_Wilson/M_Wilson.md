@@ -55,3 +55,11 @@ That said, I have taken it upon myself to build a secondary capstone...
 to showcase my true capabilities and defeat the gatekeepers: Project ONUS
 ```
 ## The repo for this project may be found here: https://github.com/BasiliskOps/ONUS
+- [x] find data set
+- [x] create file structure
+- [ ] seed data into api
+- [ ] build interactive dash
+- [ ] polish interface with css
+- [ ] test
+- [ ] deploy
+- [ ] practice presentation
