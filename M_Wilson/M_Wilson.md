@@ -57,7 +57,7 @@ to showcase my true capabilities and defeat the gatekeepers: Project ONUS
 ## The repo for this project may be found here: https://github.com/BasiliskOps/ONUS
 - [x] find data set
 - [x] create file structure
-- [ ] seed data into api
+- [ ] import XLS data / or go down upload functionality route
 - [ ] build interactive dash
 - [ ] polish interface with css
 - [ ] test
