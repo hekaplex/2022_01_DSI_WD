@@ -57,9 +57,10 @@ to showcase my true capabilities and defeat the gatekeepers: Project ONUS
 ## The repo for this project may be found here: https://github.com/BasiliskOps/ONUS
 - [x] find data set
 - [x] create file structure
-- [ ] import XLS data / or go down upload functionality route
-- [ ] build interactive dash
-- [ ] polish interface with css
-- [ ] test
+- [ ] import XLS data / or go down upload functionality route <~~ Statista
+- [ ] build interactive dash <~~ Dash
+- [ ] add analytic functionality to Dash chart *granted there is enough time*
+- [ ] polish interface with css <~~ Mouse cursor gradient tracking and colour palette
+- [ ] test <~~ client = TestClient(app) as FastAPI is built on Starlette
 - [ ] deploy
 - [ ] practice presentation
