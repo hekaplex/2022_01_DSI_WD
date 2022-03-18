@@ -8,7 +8,8 @@
   "firstName": "Matthew",
   "lastName": "Wilson",
   "nationality": "American",
-  "skills": [Python, Linux, Javascript, Solidity, PostgreSQL, PowerBI]
+  "skills": [Python, Linux, Solidity, PostgreSQL, PowerBI, Ethical Hacking],
+  "organizations": [TraceLabs, Anti-Human Trafficking Intelligence Initiative]
 }
 ```
 :trollface: :trollface: :trollface: :trollface: :trollface: :trollface: 
