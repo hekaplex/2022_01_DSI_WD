@@ -5,7 +5,7 @@
 
 ```
 "Alumni": {
-  "firstName": "M.",
+  "firstName": "Matthew",
   "lastName": "Wilson",
   "age": 30,
   "nationality": "American"
