@@ -4,7 +4,7 @@
 :trollface: :trollface: :trollface: :trollface: :trollface: :trollface: 
 
 ```
-"Student": {
+"Alumni": {
   "firstName": "M.",
   "lastName": "Wilson",
   "age": 30,
