@@ -4,11 +4,12 @@
 :trollface: :trollface: :trollface: :trollface: :trollface: :trollface: 
 
 ```
-"Student": {
-  "firstName": "M.",
+"Alumni": {
+  "firstName": "Matthew",
   "lastName": "Wilson",
-  "age": 30,
-  "nationality": "American"
+  "nationality": "American",
+  "skills": [Python, Linux, Solidity, PostgreSQL, PowerBI, Ethical Hacking],
+  "organizations": [TraceLabs, Anti-Human Trafficking Intelligence Initiative]
 }
 ```
 :trollface: :trollface: :trollface: :trollface: :trollface: :trollface: 
