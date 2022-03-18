@@ -7,8 +7,8 @@
 "Alumni": {
   "firstName": "Matthew",
   "lastName": "Wilson",
-  "age": 30,
-  "nationality": "American"
+  "nationality": "American",
+  "skills": [Python, Linux, Javascript, Solidity, PostgreSQL, PowerBI]
 }
 ```
 :trollface: :trollface: :trollface: :trollface: :trollface: :trollface: 
