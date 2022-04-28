@@ -1,0 +1,225 @@
+{
+	"name": "Create Spark Table with NYC Taxi Data",
+	"properties": {
+		"nbformat": 4,
+		"nbformat_minor": 2,
+		"sessionProperties": {
+			"driverMemory": "28g",
+			"driverCores": 4,
+			"executorMemory": "28g",
+			"executorCores": 4,
+			"numExecutors": 2,
+			"conf": {
+				"spark.dynamicAllocation.enabled": "false",
+				"spark.dynamicAllocation.minExecutors": "2",
+				"spark.dynamicAllocation.maxExecutors": "2",
+				"spark.autotune.trackingId": "b295f1f5-f06d-41f9-9d1e-34d600c65e4e"
+			}
+		},
+		"metadata": {
+			"saveOutput": true,
+			"synapse_widget": {
+				"version": "0.1"
+			},
+			"enableDebugMode": false,
+			"kernelspec": {
+				"name": "synapse_pyspark",
+				"display_name": "python"
+			},
+			"language_info": {
+				"name": "python"
+			},
+			"sessionKeepAliveTimeout": 30
+		},
+		"cells": [
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"## Load data\n",
+					"Get a sample data of nyc yellow taxi from Azure Open Datasets"
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"list = [\"Q\",\"W\",\"Y\",\"U\",\"I\",\"O\",\"p\",\"l\"]\n",
+					"    print(a+\"A\"+b +\"SE\")"
+				],
+				"attachments": null,
+				"execution_count": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"from azureml.opendatasets import NycTlcYellow\n",
+					"from datetime import datetime\n",
+					"from dateutil import parser\n",
+					"\n",
+					"start_date = parser.parse('2018-05-01')\n",
+					"end_date = parser.parse('2018-05-07')\n",
+					"nyc_tlc = NycTlcYellow(start_date=start_date, end_date=end_date)\n",
+					"nyc_tlc_df = nyc_tlc.to_pandas_dataframe()\n",
+					"nyc_tlc_df.info()"
+				],
+				"attachments": null,
+				"execution_count": null
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"outputs_hidden": false,
+						"source_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"collapsed": true
+				},
+				"source": [
+					"from IPython.display import display\n",
+					"\n",
+					"sampled_df = nyc_tlc_df.sample(n=10000, random_state=123)\n",
+					"display(sampled_df.head(5))"
+				],
+				"attachments": null,
+				"execution_count": null
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"## Prepare and featurize data\n",
+					"- There are extra dimensions that are not going to be useful in the model. We just take the dimensions that we need and put them into the featurised dataframe. \n",
+					"- There are also a bunch of outliers in the data so we need to filter them out."
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"outputs_hidden": false,
+						"source_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"collapsed": true
+				},
+				"source": [
+					"import numpy\n",
+					"import pandas\n",
+					"\n",
+					"def get_pickup_time(df):\n",
+					"    pickupHour = df['pickupHour'];\n",
+					"    if ((pickupHour >= 7) & (pickupHour <= 10)):\n",
+					"        return 'AMRush'\n",
+					"    elif ((pickupHour >= 11) & (pickupHour <= 15)):\n",
+					"        return 'Afternoon'\n",
+					"    elif ((pickupHour >= 16) & (pickupHour <= 19)):\n",
+					"        return 'PMRush'\n",
+					"    else:\n",
+					"        return 'Night'\n",
+					"\n",
+					"featurized_df = pandas.DataFrame()\n",
+					"featurized_df['tipped'] = (sampled_df['tipAmount'] > 0).astype('int')\n",
+					"featurized_df['fareAmount'] = sampled_df['fareAmount'].astype('float32')\n",
+					"featurized_df['paymentType'] = sampled_df['paymentType'].astype('int')\n",
+					"featurized_df['passengerCount'] = sampled_df['passengerCount'].astype('int')\n",
+					"featurized_df['tripDistance'] = sampled_df['tripDistance'].astype('float32')\n",
+					"featurized_df['pickupHour'] = sampled_df['tpepPickupDateTime'].dt.hour.astype('int')\n",
+					"featurized_df['tripTimeSecs'] = ((sampled_df['tpepDropoffDateTime'] - sampled_df['tpepPickupDateTime']) / numpy.timedelta64(1, 's')).astype('int')\n",
+					"\n",
+					"featurized_df['pickupTimeBin'] = featurized_df.apply(get_pickup_time, axis=1)\n",
+					"featurized_df = featurized_df.drop(columns='pickupHour')\n",
+					"\n",
+					"display(featurized_df.head(5))\n",
+					""
+				],
+				"attachments": null,
+				"execution_count": null
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"outputs_hidden": false,
+						"source_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"collapsed": true
+				},
+				"source": [
+					"filtered_df = featurized_df[(featurized_df.tipped >= 0) & (featurized_df.tipped <= 1)\\\n",
+					"    & (featurized_df.fareAmount >= 1) & (featurized_df.fareAmount <= 250)\\\n",
+					"    & (featurized_df.paymentType >= 1) & (featurized_df.paymentType <= 2)\\\n",
+					"    & (featurized_df.passengerCount > 0) & (featurized_df.passengerCount < 8)\\\n",
+					"    & (featurized_df.tripDistance >= 0) & (featurized_df.tripDistance <= 100)\\\n",
+					"    & (featurized_df.tripTimeSecs >= 30) & (featurized_df.tripTimeSecs <= 7200)]\n",
+					"\n",
+					"filtered_df.info()"
+				],
+				"attachments": null,
+				"execution_count": null
+			},
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"## Save the data to spark table"
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"outputs_hidden": false,
+						"source_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"collapsed": true
+				},
+				"source": [
+					"spark_df = spark.createDataFrame(filtered_df)\n",
+					"spark_df.write.mode(\"overwrite\").saveAsTable(\"default.NYC_Taxi\")"
+				],
+				"attachments": null,
+				"execution_count": null
+			}
+		]
+	}
+}

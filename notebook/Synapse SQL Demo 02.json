@@ -1,0 +1,47 @@
+{
+	"name": "Synapse SQL Demo 02",
+	"properties": {
+		"nbformat": 4,
+		"nbformat_minor": 2,
+		"sessionProperties": {
+			"driverMemory": "28g",
+			"driverCores": 4,
+			"executorMemory": "28g",
+			"executorCores": 4,
+			"numExecutors": 2,
+			"conf": {
+				"spark.dynamicAllocation.enabled": "false",
+				"spark.dynamicAllocation.minExecutors": "2",
+				"spark.dynamicAllocation.maxExecutors": "2",
+				"spark.autotune.trackingId": "0a127823-54a4-4931-b6c1-21158fba0ebb"
+			}
+		},
+		"metadata": {
+			"saveOutput": true,
+			"synapse_widget": {
+				"version": "0.1"
+			},
+			"enableDebugMode": false,
+			"kernelspec": {
+				"name": "synapse_pyspark",
+				"display_name": "python"
+			},
+			"language_info": {
+				"name": "python"
+			},
+			"sessionKeepAliveTimeout": 30
+		},
+		"cells": [
+			{
+				"cell_type": "code",
+				"source": [
+					"\r\n",
+					"from delta.tables import *\r\n",
+					"deltaTable = DeltaTable.convertToDelta(spark, \"parquet.`abfss://delta-lake@sqlondemandstorage.dfs.core.windows.net/covid`\")"
+				],
+				"attachments": null,
+				"execution_count": null
+			}
+		]
+	}
+}
