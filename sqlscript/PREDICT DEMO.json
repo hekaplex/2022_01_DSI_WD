@@ -1,0 +1,17 @@
+{
+	"name": "PREDICT DEMO",
+	"properties": {
+		"content": {
+			"query": "-- Sample table schema for storing a model and related data\nCREATE DATABASE Models\nGO\nUSE Models\nGO \nCREATE TABLE [dbo].[Models]\n(\n    [Id] [int] IDENTITY(1,1) NOT NULL,\n    [Model] [varbinary](max) NULL,\n    [Description] [varchar](200) NULL\n)\nWITH\n(\n    DISTRIBUTION = ROUND_ROBIN,\n    HEAP\n)\nGO\n-- Copy command to load hexadecimal string of the model from Azure Data Lake storage location\nCOPY INTO [Models] (Model)\nFROM '<enter your storage location>'\nWITH (\n    FILE_TYPE = 'CSV',\n    CREDENTIAL=(IDENTITY= 'Shared Access Signature', SECRET='<enter your storage key here>')\n)\nGOTO\n-- Query for ML predictions\nSELECT d.*, p.Score\nFROM PREDICT(MODEL = (SELECT Model FROM Models WHERE Id = 1),\nDATA = dbo.mytable AS d, RUNTIME = ONNX) WITH (Score float) AS p;",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "dedibear",
+				"poolName": "dedibear"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
