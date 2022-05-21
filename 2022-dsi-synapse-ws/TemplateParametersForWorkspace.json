@@ -10,6 +10,12 @@
 		},
 		"2022-dsi-synapse-ws-WorkspaceDefaultStorage_properties_typeProperties_url": {
 			"value": "https://2022dsidatalake.dfs.core.windows.net"
+		},
+		"AzureMLService1_properties_typeProperties_subscriptionId": {
+			"value": "3c3bb71f-3a4c-436f-9e0a-7407d75a82fa"
+		},
+		"AzureMLService1_properties_typeProperties_resourceGroupName": {
+			"value": "2020-10-DSI-WD-MLSPACE-RG"
 		}
 	}
 }

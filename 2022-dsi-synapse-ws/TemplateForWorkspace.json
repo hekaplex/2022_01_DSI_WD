@@ -14,6 +14,14 @@
 		"2022-dsi-synapse-ws-WorkspaceDefaultStorage_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://2022dsidatalake.dfs.core.windows.net"
+		},
+		"AzureMLService1_properties_typeProperties_subscriptionId": {
+			"type": "string",
+			"defaultValue": "3c3bb71f-3a4c-436f-9e0a-7407d75a82fa"
+		},
+		"AzureMLService1_properties_typeProperties_resourceGroupName": {
+			"type": "string",
+			"defaultValue": "2020-10-DSI-WD-MLSPACE-RG"
 		}
 	},
 	"variables": {
@@ -457,7 +465,7 @@
 						"spark.dynamicAllocation.enabled": "false",
 						"spark.dynamicAllocation.minExecutors": "2",
 						"spark.dynamicAllocation.maxExecutors": "2",
-						"spark.autotune.trackingId": "fa08c34e-d6f6-4699-8a32-cea78cc285b9"
+						"spark.autotune.trackingId": "94b2eb74-93eb-4724-96ed-416e427bb096"
 					}
 				},
 				"metadata": {
@@ -1121,7 +1129,7 @@
 						"spark.dynamicAllocation.enabled": "false",
 						"spark.dynamicAllocation.minExecutors": "2",
 						"spark.dynamicAllocation.maxExecutors": "2",
-						"spark.autotune.trackingId": "3f0d8ddc-dec7-4ea9-9b05-10abcec0470a"
+						"spark.autotune.trackingId": "7da5689b-a710-4384-b2e9-f6e9a11a02fc"
 					}
 				},
 				"metadata": {
@@ -1191,29 +1199,11 @@
 					{
 						"cell_type": "code",
 						"metadata": {
-							"jupyter": {
-								"source_hidden": false,
-								"outputs_hidden": false
-							},
-							"nteract": {
-								"transient": {
-									"deleting": false
-								}
-							},
-							"collapsed": true
-						},
-						"source": [
-							"#%pip list\n",
-							"#%pip install scikit-learn==0.20.3"
-						],
-						"outputs": [],
-						"execution_count": 2
-					},
-					{
-						"cell_type": "code",
-						"metadata": {
 							"gather": {
 								"logged": 1599713958224
+							},
+							"jupyter": {
+								"outputs_hidden": true
 							}
 						},
 						"source": [
@@ -1228,7 +1218,7 @@
 							"nyc_tlc_df.info()"
 						],
 						"outputs": [],
-						"execution_count": null
+						"execution_count": 19
 					},
 					{
 						"cell_type": "code",
@@ -1254,7 +1244,7 @@
 							"display(sampled_df.head(5))"
 						],
 						"outputs": [],
-						"execution_count": null
+						"execution_count": 20
 					},
 					{
 						"cell_type": "markdown",
@@ -1319,7 +1309,7 @@
 							""
 						],
 						"outputs": [],
-						"execution_count": null
+						"execution_count": 6
 					},
 					{
 						"cell_type": "code",
@@ -1349,7 +1339,7 @@
 							"filtered_df.info()"
 						],
 						"outputs": [],
-						"execution_count": null
+						"execution_count": 7
 					},
 					{
 						"cell_type": "markdown",
@@ -1395,7 +1385,7 @@
 							"y_test = pandas.DataFrame(test_df.iloc[:,test_df.columns.tolist().index('tipped')])"
 						],
 						"outputs": [],
-						"execution_count": null
+						"execution_count": 8
 					},
 					{
 						"cell_type": "markdown",
@@ -1432,7 +1422,7 @@
 							"test_df.to_csv('test_data.csv', index=False)"
 						],
 						"outputs": [],
-						"execution_count": null
+						"execution_count": 9
 					},
 					{
 						"cell_type": "markdown",
@@ -1500,7 +1490,7 @@
 							"clf.fit(x_train, y_train)"
 						],
 						"outputs": [],
-						"execution_count": null
+						"execution_count": 10
 					},
 					{
 						"cell_type": "code",
@@ -1525,7 +1515,7 @@
 							"print(score)"
 						],
 						"outputs": [],
-						"execution_count": null
+						"execution_count": 11
 					},
 					{
 						"cell_type": "markdown",
@@ -1582,7 +1572,7 @@
 							"onnx_model = convert_sklearn(clf, \"nyc_taxi_tip_predict\", model_inputs)"
 						],
 						"outputs": [],
-						"execution_count": null
+						"execution_count": 12
 					},
 					{
 						"cell_type": "markdown",
@@ -1621,7 +1611,7 @@
 							"print(ws.name, ws.resource_group, ws.location, ws.subscription_id, sep='\\n')"
 						],
 						"outputs": [],
-						"execution_count": null
+						"execution_count": 13
 					},
 					{
 						"cell_type": "code",
@@ -1671,6 +1661,28 @@
 				]
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/AzureMLService1')]",
+			"type": "Microsoft.Synapse/workspaces/linkedServices",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"annotations": [],
+				"type": "AzureMLService",
+				"typeProperties": {
+					"subscriptionId": "[parameters('AzureMLService1_properties_typeProperties_subscriptionId')]",
+					"resourceGroupName": "[parameters('AzureMLService1_properties_typeProperties_resourceGroupName')]",
+					"mlWorkspaceName": "2022dsiwdazureml",
+					"authentication": "MSI"
+				},
+				"connectVia": {
+					"referenceName": "AutoResolveIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
+			]
 		}
 	]
 }
