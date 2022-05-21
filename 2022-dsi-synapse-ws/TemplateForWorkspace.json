@@ -457,7 +457,7 @@
 						"spark.dynamicAllocation.enabled": "false",
 						"spark.dynamicAllocation.minExecutors": "2",
 						"spark.dynamicAllocation.maxExecutors": "2",
-						"spark.autotune.trackingId": "0b2ba2ba-4998-40b1-9f4d-75d7ccac65e2"
+						"spark.autotune.trackingId": "fa08c34e-d6f6-4699-8a32-cea78cc285b9"
 					}
 				},
 				"metadata": {
@@ -483,7 +483,6 @@
 						"nodeCount": 3,
 						"cores": 4,
 						"memory": 28,
-						"extraHeader": {},
 						"automaticScaleJobs": false
 					},
 					"sessionKeepAliveTimeout": 30
@@ -768,7 +767,7 @@
 						"spark.dynamicAllocation.enabled": "false",
 						"spark.dynamicAllocation.minExecutors": "2",
 						"spark.dynamicAllocation.maxExecutors": "2",
-						"spark.autotune.trackingId": "5d5ec9cf-593a-4fa2-b2b6-24e9090cbd62"
+						"spark.autotune.trackingId": "5d73ef6d-858d-404e-af26-0f968adc06f5"
 					}
 				},
 				"metadata": {
@@ -794,7 +793,6 @@
 						"nodeCount": 3,
 						"cores": 4,
 						"memory": 28,
-						"extraHeader": {},
 						"automaticScaleJobs": false
 					},
 					"sessionKeepAliveTimeout": 30
@@ -1123,7 +1121,7 @@
 						"spark.dynamicAllocation.enabled": "false",
 						"spark.dynamicAllocation.minExecutors": "2",
 						"spark.dynamicAllocation.maxExecutors": "2",
-						"spark.autotune.trackingId": "2675fc13-5c20-4e99-9992-e694de5a3317"
+						"spark.autotune.trackingId": "3f0d8ddc-dec7-4ea9-9b05-10abcec0470a"
 					}
 				},
 				"metadata": {
@@ -1149,7 +1147,6 @@
 						"nodeCount": 3,
 						"cores": 4,
 						"memory": 28,
-						"extraHeader": {},
 						"automaticScaleJobs": false
 					},
 					"sessionKeepAliveTimeout": 30
@@ -1210,7 +1207,7 @@
 							"#%pip install scikit-learn==0.20.3"
 						],
 						"outputs": [],
-						"execution_count": 1
+						"execution_count": 2
 					},
 					{
 						"cell_type": "code",
