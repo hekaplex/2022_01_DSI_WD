@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "e626edba-c631-4460-8b3b-d4b803929101"
+				"spark.autotune.trackingId": "999f5aef-99f3-4695-a31d-a0d8c1099f5b"
 			}
 		},
 		"metadata": {
@@ -105,7 +105,7 @@
 					"nyc_tlc_df = nyc_tlc.to_pandas_dataframe()\r\n",
 					"nyc_tlc_df.info()"
 				],
-				"execution_count": 19
+				"execution_count": 23
 			},
 			{
 				"cell_type": "code",
@@ -130,7 +130,7 @@
 					"sampled_df = nyc_tlc_df.sample(n=10000, random_state=123)\r\n",
 					"display(sampled_df.head(5))"
 				],
-				"execution_count": 20
+				"execution_count": 24
 			},
 			{
 				"cell_type": "markdown",
@@ -194,7 +194,7 @@
 					"display(featurized_df.head(5))\r\n",
 					""
 				],
-				"execution_count": 6
+				"execution_count": 25
 			},
 			{
 				"cell_type": "code",
@@ -223,7 +223,7 @@
 					"\r\n",
 					"filtered_df.info()"
 				],
-				"execution_count": 7
+				"execution_count": 26
 			},
 			{
 				"cell_type": "markdown",
@@ -268,7 +268,7 @@
 					"x_test = pandas.DataFrame(test_df.drop(['tipped'], axis = 1))\r\n",
 					"y_test = pandas.DataFrame(test_df.iloc[:,test_df.columns.tolist().index('tipped')])"
 				],
-				"execution_count": 8
+				"execution_count": 27
 			},
 			{
 				"cell_type": "markdown",
@@ -304,7 +304,7 @@
 				"source": [
 					"test_df.to_csv('test_data.csv', index=False)"
 				],
-				"execution_count": 9
+				"execution_count": 28
 			},
 			{
 				"cell_type": "markdown",
@@ -371,7 +371,7 @@
 					"# Train the model\r\n",
 					"clf.fit(x_train, y_train)"
 				],
-				"execution_count": 10
+				"execution_count": 29
 			},
 			{
 				"cell_type": "code",
@@ -395,7 +395,7 @@
 					"score = clf.score(x_test, y_test)\r\n",
 					"print(score)"
 				],
-				"execution_count": 11
+				"execution_count": 30
 			},
 			{
 				"cell_type": "markdown",
@@ -451,7 +451,7 @@
 					"model_inputs = convert_dataframe_schema(x_train)\r\n",
 					"onnx_model = convert_sklearn(clf, \"nyc_taxi_tip_predict\", model_inputs)"
 				],
-				"execution_count": 12
+				"execution_count": 31
 			},
 			{
 				"cell_type": "markdown",
@@ -489,7 +489,7 @@
 					"ws = Workspace.from_config()\r\n",
 					"print(ws.name, ws.resource_group, ws.location, ws.subscription_id, sep='\\n')"
 				],
-				"execution_count": 13
+				"execution_count": 33
 			},
 			{
 				"cell_type": "code",

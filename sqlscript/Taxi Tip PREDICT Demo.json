@@ -1,0 +1,17 @@
+{
+	"name": "Taxi Tip PREDICT Demo",
+	"properties": {
+		"content": {
+			"query": "IF NOT EXISTS (SELECT * FROM sys.objects WHERE NAME = 'nyc_taxi' AND TYPE = 'U')\nCREATE TABLE dbo.nyc_taxi\n(\n    tipped int,\n    fareAmount float,\n    paymentType int,\n    passengerCount int,\n    tripDistance float,\n    tripTimeSecs bigint,\n    pickupTimeBin nvarchar(30)\n)\nWITH\n(\n    DISTRIBUTION = ROUND_ROBIN,\n    CLUSTERED COLUMNSTORE INDEX\n)\nGO\n\nCOPY INTO dbo.nyc_taxi\n(tipped 1, fareAmount 2, paymentType 3, passengerCount 4, tripDistance 5, tripTimeSecs 6, pickupTimeBin 7)\nFROM 'https://2022dsidatalake.blob.core.windows.net/users/synapse/workspaces/2022-dsi-synapse-ws/warehouse/model_sample/test_data.csv'\nWITH\n(\n    FILE_TYPE = 'CSV',\n    ROWTERMINATOR='0x0A',\n    FIELDQUOTE = '\"',\n    FIELDTERMINATOR = ',',\n    FIRSTROW = 2\n)\nGO\n\nSELECT TOP 100 * FROM nyc_taxi\nGO",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "dedicatedpool",
+				"poolName": "dedicatedpool"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

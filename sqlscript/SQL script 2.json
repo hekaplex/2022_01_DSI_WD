@@ -1,0 +1,17 @@
+{
+	"name": "SQL script 2",
+	"properties": {
+		"content": {
+			"query": "-- Create a stored procedure for storing the scoring script.\nCREATE PROCEDURE dbo.predict_synapse_taxi\nAS\nBEGIN\n-- Select input scoring data and assign aliases.\nWITH InputData AS\n(\n    SELECT\n        CAST([fareAmount] AS [real]) AS [fareAmount],\n        CAST([paymentType] AS [bigint]) AS [paymentType],\n        CAST([passengerCount] AS [bigint]) AS [passengerCount],\n        CAST([tripDistance] AS [real]) AS [tripDistance],\n        [tripTimeSecs],\n        CAST([pickupTimeBin] AS [varchar]) AS [pickupTimeBin]\n    FROM [dbo].[nyc_taxi]\n)\n-- Using T-SQL Predict command to score machine learning models. \nSELECT *\nFROM PREDICT (MODEL = (SELECT [model] FROM dbo.scored_synapse_taxi WHERE [ID] = 'nyc_taxi_tip_predict:1'),\n              DATA = InputData,\n              RUNTIME = ONNX) WITH ([output_label] [bigint])\nEND\nGO\n\n-- Execute the above stored procedure.\nEXEC dbo.predict_synapse_taxi",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "dedicatedpool",
+				"poolName": "dedicatedpool"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
