@@ -1,8 +1,8 @@
 {
-	"name": "Lake Database Example",
+	"name": "05 Lake Database Example",
 	"properties": {
 		"content": {
-			"query": "INSERT INTO `SynapseLakeDatabase`.`customer` VALUES (1,'2021-02-18',1022,557,101,'Tailspin Toys (Head Office)','Waldemar Fisar',90410,466);",
+			"query": "INSERT INTO `SynapseLakeDatabase`.`customer` VALUES (1,'2021-02-18',1022,557,101,'Tailspin Toys (Head Office)','Waldemar Fisar',90410,466);\n\nSELECT TOP (100) [ProductId]\n,[ProductName]\n,[ProductDescription]\n,[ProductInternalName]\n,[ItemSku]\n,[PrimaryBrandId]\nFROM [Retail_mil].[dbo].[RetailProduct]",
 			"metadata": {
 				"language": "sql"
 			},
