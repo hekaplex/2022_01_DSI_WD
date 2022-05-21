@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "b0f5ba69-acd6-4617-a738-c6fd02fe44c1"
+				"spark.autotune.trackingId": "b71bb577-ed55-4cb1-9980-a02abdc81263"
 			}
 		},
 		"metadata": {
@@ -96,7 +96,7 @@
 					"query = imageStream.select(\"image.height\").writeStream.format(\"memory\").queryName(\"heights\").start()\n",
 					"print(\"Streaming query activity: {}\".format(query.isActive))"
 				],
-				"execution_count": 2
+				"execution_count": 10
 			},
 			{
 				"cell_type": "markdown",
@@ -114,7 +114,7 @@
 					"heights = spark.sql(\"select * from heights\")\n",
 					"print(\"Streamed {} heights\".format(heights.count()))"
 				],
-				"execution_count": 3
+				"execution_count": 6
 			},
 			{
 				"cell_type": "markdown",
@@ -127,7 +127,7 @@
 				"source": [
 					"query.stop()"
 				],
-				"execution_count": 4
+				"execution_count": 7
 			},
 			{
 				"cell_type": "markdown",
@@ -154,7 +154,7 @@
 					"Image.fromarray(arr, \"RGB\")   # display the image inside notebook\n",
 					"print(images.count())"
 				],
-				"execution_count": 5
+				"execution_count": 11
 			},
 			{
 				"cell_type": "markdown",
@@ -170,7 +170,7 @@
 					"\n",
 					"tr = (ImageTransformer()                  # images are resized and then cropped\n",
 					"      .setOutputCol(\"transformed\")\n",
-					"      .resize(height = 200, width = 200)\n",
+					"      .resize(200,  200)\n",
 					"      .crop(0, 0, height = 180, width = 180) )\n",
 					"\n",
 					"small = tr.transform(images).select(\"transformed\")\n",
@@ -178,7 +178,7 @@
 					"im = small.take(3)[2][0]                  # take third image\n",
 					"Image.fromarray(toNDArray(im), \"RGB\")   # display the image inside notebook"
 				],
-				"execution_count": 6
+				"execution_count": 16
 			},
 			{
 				"cell_type": "markdown",
@@ -206,7 +206,7 @@
 					"im = noblue.take(3)[2][0]                # take second image\n",
 					"Image.fromarray(toNDArray(im), \"RGB\")   # display the image inside notebook"
 				],
-				"execution_count": 7
+				"execution_count": 17
 			},
 			{
 				"cell_type": "markdown",
@@ -227,7 +227,25 @@
 					"print(type(vector))\n",
 					"len(vector.toArray())"
 				],
-				"execution_count": 8
+				"execution_count": 18
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"vector.toArray()"
+				],
+				"execution_count": 19
 			},
 			{
 				"cell_type": "code",
