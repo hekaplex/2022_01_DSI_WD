@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "27d3f05a-2d58-4b56-9fe9-f1f4b629b518"
+				"spark.autotune.trackingId": "e626edba-c631-4460-8b3b-d4b803929101"
 			}
 		},
 		"metadata": {
@@ -87,28 +87,11 @@
 			{
 				"cell_type": "code",
 				"metadata": {
-					"jupyter": {
-						"source_hidden": false,
-						"outputs_hidden": false
-					},
-					"nteract": {
-						"transient": {
-							"deleting": false
-						}
-					},
-					"collapsed": true
-				},
-				"source": [
-					"#%pip list\n",
-					"#%pip install scikit-learn==0.20.3"
-				],
-				"execution_count": 2
-			},
-			{
-				"cell_type": "code",
-				"metadata": {
 					"gather": {
 						"logged": 1599713958224
+					},
+					"jupyter": {
+						"outputs_hidden": true
 					}
 				},
 				"source": [
@@ -122,7 +105,7 @@
 					"nyc_tlc_df = nyc_tlc.to_pandas_dataframe()\r\n",
 					"nyc_tlc_df.info()"
 				],
-				"execution_count": null
+				"execution_count": 19
 			},
 			{
 				"cell_type": "code",
@@ -147,7 +130,7 @@
 					"sampled_df = nyc_tlc_df.sample(n=10000, random_state=123)\r\n",
 					"display(sampled_df.head(5))"
 				],
-				"execution_count": null
+				"execution_count": 20
 			},
 			{
 				"cell_type": "markdown",
@@ -211,7 +194,7 @@
 					"display(featurized_df.head(5))\r\n",
 					""
 				],
-				"execution_count": null
+				"execution_count": 6
 			},
 			{
 				"cell_type": "code",
@@ -240,7 +223,7 @@
 					"\r\n",
 					"filtered_df.info()"
 				],
-				"execution_count": null
+				"execution_count": 7
 			},
 			{
 				"cell_type": "markdown",
@@ -285,7 +268,7 @@
 					"x_test = pandas.DataFrame(test_df.drop(['tipped'], axis = 1))\r\n",
 					"y_test = pandas.DataFrame(test_df.iloc[:,test_df.columns.tolist().index('tipped')])"
 				],
-				"execution_count": null
+				"execution_count": 8
 			},
 			{
 				"cell_type": "markdown",
@@ -321,7 +304,7 @@
 				"source": [
 					"test_df.to_csv('test_data.csv', index=False)"
 				],
-				"execution_count": null
+				"execution_count": 9
 			},
 			{
 				"cell_type": "markdown",
@@ -388,7 +371,7 @@
 					"# Train the model\r\n",
 					"clf.fit(x_train, y_train)"
 				],
-				"execution_count": null
+				"execution_count": 10
 			},
 			{
 				"cell_type": "code",
@@ -412,7 +395,7 @@
 					"score = clf.score(x_test, y_test)\r\n",
 					"print(score)"
 				],
-				"execution_count": null
+				"execution_count": 11
 			},
 			{
 				"cell_type": "markdown",
@@ -468,7 +451,7 @@
 					"model_inputs = convert_dataframe_schema(x_train)\r\n",
 					"onnx_model = convert_sklearn(clf, \"nyc_taxi_tip_predict\", model_inputs)"
 				],
-				"execution_count": null
+				"execution_count": 12
 			},
 			{
 				"cell_type": "markdown",
@@ -506,7 +489,7 @@
 					"ws = Workspace.from_config()\r\n",
 					"print(ws.name, ws.resource_group, ws.location, ws.subscription_id, sep='\\n')"
 				],
-				"execution_count": null
+				"execution_count": 13
 			},
 			{
 				"cell_type": "code",
