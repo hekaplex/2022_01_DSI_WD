@@ -1,0 +1,17 @@
+{
+	"name": "AzureMLService1",
+	"properties": {
+		"annotations": [],
+		"type": "AzureMLService",
+		"typeProperties": {
+			"subscriptionId": "3c3bb71f-3a4c-436f-9e0a-7407d75a82fa",
+			"resourceGroupName": "2020-10-DSI-WD-MLSPACE-RG",
+			"mlWorkspaceName": "2022dsiwdazureml",
+			"authentication": "MSI"
+		},
+		"connectVia": {
+			"referenceName": "AutoResolveIntegrationRuntime",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
