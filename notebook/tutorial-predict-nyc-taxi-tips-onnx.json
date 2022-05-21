@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "569f8802-aa4b-4bc8-91bc-88c19d89c7d7"
+				"spark.autotune.trackingId": "27d3f05a-2d58-4b56-9fe9-f1f4b629b518"
 			}
 		},
 		"metadata": {
@@ -102,7 +102,7 @@
 					"#%pip list\n",
 					"#%pip install scikit-learn==0.20.3"
 				],
-				"execution_count": 1
+				"execution_count": 2
 			},
 			{
 				"cell_type": "code",
