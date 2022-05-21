@@ -1,8 +1,8 @@
 {
-	"name": "SQL script 1",
+	"name": "Lake Database Example",
 	"properties": {
 		"content": {
-			"query": "",
+			"query": "INSERT INTO `SynapseLakeDatabase`.`customer` VALUES (1,'2021-02-18',1022,557,101,'Tailspin Toys (Head Office)','Waldemar Fisar',90410,466);",
 			"metadata": {
 				"language": "sql"
 			},

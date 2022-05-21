@@ -1,0 +1,22 @@
+{
+	"name": "SynapseLakeDatabase",
+	"properties": {
+		"Name": "SynapseLakeDatabase",
+		"EntityType": "DATABASE",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"Properties": {
+			"IsSyMSCDMDatabase": true
+		},
+		"Source": {
+			"Provider": "ADLS",
+			"Location": "abfss://users@2022dsidatalake.dfs.core.windows.net/SynapseLakeDatabase",
+			"Properties": {
+				"FormatType": "csv",
+				"LinkedServiceName": "2022-dsi-synapse-ws-WorkspaceDefaultStorage"
+			}
+		}
+	},
+	"type": "DATABASE"
+}
