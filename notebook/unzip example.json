@@ -20,7 +20,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "157a10c8-6799-4c31-8c37-b480976500e9"
+				"spark.autotune.trackingId": "c4c5a64e-0e22-49c6-b591-70c8ff5c8a4c"
 			}
 		},
 		"metadata": {
@@ -92,11 +92,11 @@
 				"source": [
 					"\r\n",
 					"\r\n",
-					"with ZipFile(u'synapse/workspaces/2022-dsi-synapse-ws/warehouse/model_sample/loaded_capture_twitter_10M.zip', 'r') as zipObj:\r\n",
+					"with ZipFile('abfss://users@2022dsidatalake.dfs.core.windows.net/synapse/workspaces/2022-dsi-synapse-ws/warehouse/model_sample/loaded_capture_twitter_10M.zip', 'r') as zipObj:\r\n",
 					"   # Extract all the contents of zip file in current directory\r\n",
 					"   zipObj.extractall()"
 				],
-				"execution_count": 3
+				"execution_count": 11
 			},
 			{
 				"cell_type": "code",
@@ -131,7 +131,55 @@
 					}
 				},
 				"source": [
+					"abfs[s]://2022dsidatalake.dfs.core.windows.net/warehouse/model_sample/loaded_capture_twitter_10M.zip'\r\n",
+					"\r\n",
 					""
+				],
+				"execution_count": null
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"#Read data file from URI of secondary Azure Data Lake Storage Gen2\r\n",
+					"\r\n",
+					"import pandas\r\n",
+					"\r\n",
+					"#read data file\r\n",
+					"df = pandas.read_csv('http://2022dsidatalake.dfs.core.windows.net/synapse/workspaces/2022-dsi-synapse-ws/warehouse/model_sample/test_data.csv', storage_options = {'linked_service' : '2022-dsi-synapse-ws-WorkspaceDefaultStorage'})\r\n",
+					"print(df)\r\n",
+					"   "
+				],
+				"execution_count": 8
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"\r\n",
+					"   #write data file\r\n",
+					"   data = pandas.DataFrame({'Name':['A', 'B', 'C', 'D'], 'ID':[20, 21, 19, 18]})\r\n",
+					"   data.to_csv('abfs[s]://file_system_name@account_name.dfs.core.windows.net/file_path',    storage_options = {'linked_service' : 'linked_service_name'})"
 				],
 				"execution_count": null
 			}
