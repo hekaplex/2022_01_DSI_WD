@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "ace7e55a-9476-4499-833c-ed08d725627d"
+				"spark.autotune.trackingId": "9e0c7e46-61eb-4f54-b1ef-0151aa8934b2"
 			}
 		},
 		"metadata": {
@@ -60,11 +60,11 @@
 					"%%pyspark\r\n",
 					"df = spark.read.load('abfss://users@2022dsidatalake.dfs.core.windows.net/synapse/workspaces/2022-dsi-synapse-ws/warehouse/model_sample/test_data.csv', format='csv'\r\n",
 					"## If header exists uncomment line below\r\n",
-					"##, header=True\r\n",
+					", header=True\r\n",
 					")\r\n",
 					"display(df.limit(10))"
 				],
-				"execution_count": 3
+				"execution_count": 5
 			},
 			{
 				"cell_type": "code",
