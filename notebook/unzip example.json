@@ -20,7 +20,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "349e58ba-90d9-4c22-9de3-1cb8e1b35f4a"
+				"spark.autotune.trackingId": "2099969d-1bdf-4bc0-9fc1-46882ee3bf95"
 			}
 		},
 		"metadata": {
@@ -97,19 +97,118 @@
 						"transient": {
 							"deleting": false
 						}
-					},
-					"microsoft": {
-						"language": "python"
 					}
 				},
 				"source": [
-					"%%pyspark\r\n",
+					"import patoolib"
+				],
+				"execution_count": 31
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"tweetfile = 'abfss://users@2022dsidatalake.dfs.core.windows.net/synapse/workspaces/2022-dsi-synapse-ws/warehouse/model_sample/loaded_capture_twitter_10M.zip'\r\n",
+					"patoolib.extract_archive(tweetfile, outdir=\"tweetfile\")"
+				],
+				"execution_count": null
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
 					"\r\n",
-					"with ZipFile('abfss://users@2022dsidatalake.dfs.core.windows.net/synapse/workspaces/2022-dsi-synapse-ws/warehouse/model_sample/loaded_capture_twitter_10M.zip', 'r') as zipObj:\r\n",
+					"tweet_txt = spark.read.text(tweetfile)\r\n",
+					""
+				],
+				"execution_count": 25
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"tweet_txt.head(5)"
+				],
+				"execution_count": 27
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"import zipfile\r\n",
+					"import io\r\n",
+					"\r\n",
+					"def zip_extract(x):\r\n",
+					"    in_memory_data = io.BytesIO(x[1])\r\n",
+					"    file_obj = zipfile.ZipFile(in_memory_data, \"r\")\r\n",
+					"    files = [i for i in file_obj.namelist()]\r\n",
+					"    return dict(zip(files, [file_obj.open(file).read() for file in files]))\r\n",
+					"\r\n",
+					"\r\n",
+					"zips = sc.binaryFiles('abfss://users@2022dsidatalake.dfs.core.windows.net/synapse/workspaces/2022-dsi-synapse-ws/warehouse/model_sample/loaded_capture_twitter_10M.zip')\r\n",
+					"files_data = zips.map(zip_extract).collect()"
+				],
+				"execution_count": null
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"with ZipFile(tweetfile, 'r') as zipObj:\r\n",
 					"   # Extract all the contents of zip file in current directory\r\n",
 					"   zipObj.extractall()"
 				],
-				"execution_count": 4
+				"execution_count": 29
 			},
 			{
 				"cell_type": "code",
@@ -144,14 +243,110 @@
 					}
 				},
 				"source": [
+					"{\r\n",
+					"    \"name\": \"2022-dsi-synapse-ws-WorkspaceDefaultSqlServer\",\r\n",
+					"    \"type\": \"Microsoft.Synapse/workspaces/linkedservices\",\r\n",
+					"    \"properties\": {\r\n",
+					"        \"typeProperties\": {\r\n",
+					"            \"connectionString\": \"Data Source=tcp:2022-dsi-synapse-ws.sql.azuresynapse.net,1433;Initial Catalog=@{linkedService().DBName}\"\r\n",
+					"        },\r\n",
+					"        \"parameters\": {\r\n",
+					"            \"DBName\": {\r\n",
+					"                \"type\": \"String\"\r\n",
+					"            }\r\n",
+					"        },\r\n",
+					"        \"type\": \"AzureSqlDW\",\r\n",
+					"        \"connectVia\": {\r\n",
+					"            \"referenceName\": \"AutoResolveIntegrationRuntime\",\r\n",
+					"            \"type\": \"IntegrationRuntimeReference\"\r\n",
+					"        },\r\n",
+					"        \"annotations\": []\r\n",
+					"    }\r\n",
+					"}"
+				],
+				"execution_count": null
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"pandas._version"
+				],
+				"execution_count": 19
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"data = pandas.DataFrame({'Name':['Tom', 'nick', 'krish', 'jack'], 'Age':[20, 21, 19, 18]})\r\n",
+					"f = 'abfss://users@2022dsidatalake.dfs.core.windows.net/synapse/workspaces/2022-dsi-synapse-ws/warehouse/model_sample/pandas_simple.csv'\r\n",
+					"data.to_csv(f)"
+				],
+				"execution_count": 8
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"#f = 'abfss://users@2022dsidatalake.dfs.core.windows.net/synapse/workspaces/2022-dsi-synapse-ws/warehouse/model_sample/pandas_simple.csv'\r\n",
+					"f = 'abfss://users@2022dsidatalake.dfs.core.windows.net/synapse/workspaces/2022-dsi-synapse-ws/warehouse/model_sample/loaded_capture_twitter_10M.zip'\r\n",
+					"df = pandas.read_csv(f, compression=\"zip\")\r\n",
+					"df.head(3)"
+				],
+				"execution_count": null
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
 					"# To read data\r\n",
 					"import fsspec\r\n",
 					"import pandas\r\n",
 					"\r\n",
-					"adls_account_name = '' #Provide exact ADLS account name\r\n",
-					"adls_account_key = '' #Provide exact ADLS account key\r\n",
+					"adls_account_name = \"2022dsidatalake\"\r\n",
+					"adls_account_key = \"FQmf2zM/Gl1qFMtpKAllVi5UOG+msZUbhw1SEf5YbUEt7Uye3WSO+8VqTjcIUhgtq4hszVNCpokUhP5nTYEzkA==\"\r\n",
 					"\r\n",
-					"fsspec_handle = fsspec.open(\"abfss://users@2022dsidatalake.dfs.core.windows.net/synapse/workspaces/2022-dsi-synapse-ws/warehouse/model_sample/loaded_capture_twitter_10M.zip\", account_name=adls_account_name, account_key=adls_account_key)\r\n",
+					"fsspec_handle = fsspec.open(\"abfss://users@2022dsidatalake.dfs.core.windows.net/synapse/workspaces/2022-dsi-synapse-ws/warehouse/model_sample/test_data.csv\", account_name=adls_account_name, account_key=adls_account_key)\r\n",
 					"\r\n",
 					"with fsspec_handle.open() as f:\r\n",
 					"    df = pandas.read_csv(f)\r\n",
@@ -165,7 +360,7 @@
 					"\r\n",
 					"data = pandas.DataFrame({'Name':['Tom', 'nick', 'krish', 'jack'], 'Age':[20, 21, 19, 18]})\r\n",
 					"\r\n",
-					"fsspec_handle = fsspec.open('abfs[s]://<container>/<path-to-file>', account_name=adls_account_name, account_key=adls_account_key, mode=\"wt\")\r\n",
+					"fsspec_handle = fsspec.open('abfss://users@2022dsidatalake.dfs.core.windows.net/synapse/workspaces/2022-dsi-synapse-ws/warehouse/model_sample/pandas_simple.csv', account_name=adls_account_name, account_key=adls_account_key, mode=\"wt\")\r\n",
 					"\r\n",
 					"with fsspec_handle.open() as f:\r\n",
 					" data.to_csv(f)"
