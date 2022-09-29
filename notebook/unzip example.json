@@ -20,7 +20,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "2099969d-1bdf-4bc0-9fc1-46882ee3bf95"
+				"spark.autotune.trackingId": "061cda60-0c81-4fcb-82ba-7b4abc574018"
 			}
 		},
 		"metadata": {
@@ -100,9 +100,10 @@
 					}
 				},
 				"source": [
-					"import patoolib"
+					"tweetfile = 'abfss://users@2022dsidatalake.dfs.core.windows.net/synapse/workspaces/2022-dsi-synapse-ws/warehouse/model_sample/loaded_capture_twitter_10M.zip'\r\n",
+					"mssparkutils.fs.cp(tweetfile, \"user/tweet.zip\", True)# Set the third parameter as True to copy all files and directories recursively"
 				],
-				"execution_count": 31
+				"execution_count": 42
 			},
 			{
 				"cell_type": "code",
@@ -118,7 +119,175 @@
 					}
 				},
 				"source": [
+					"mssparkutils.fs.ls(\"user\")"
+				],
+				"execution_count": 46
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"mssparkutils."
+				],
+				"execution_count": null
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"with zipfile.ZipFile(\"abfss://users@2022dsidatalake.dfs.core.windows.net/user/trusted-service-user/user/tweet.zip\", 'r') as zipObject:\r\n",
+					"   listOfFileNames = zipObject.namelist()\r\n",
+					"   for fileName in listOfFileNames: print(fileName)"
+				],
+				"execution_count": 48
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"from notebookutils import mssparkutils\r\n",
+					"mssparkutils.fs.help()"
+				],
+				"execution_count": 40
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"# Import libraries\r\n",
+					"import fsspec\r\n",
+					"import os\r\n",
+					"\r\n",
+					"# Set variables\r\n",
+					"#os.mkdir(\"user\")\r\n",
+					"local_file_name = \"user/tweetfile.csv\"\r\n",
+					"ADLS_Store_Path =  'abfss://users@2022dsidatalake.dfs.core.windows.net/synapse/workspaces/2022-dsi-synapse-ws/warehouse/model_sample/local_to ADLS.csv'\r\n",
+					"# Generate local file for testing \r\n",
+					"with open(local_file_name, mode='w') as f:\r\n",
+					"    for i in range(1000):\r\n",
+					"        f.write(\"Testing local file functionality\\n\")\r\n",
+					"print(\"Created: \" + local_file_name)\r\n",
+					"\r\n",
+					"# Upload local file to ADLS \r\n",
+					"fs = fsspec.filesystem('abfs')\r\n",
+					"fs.upload(local_file_name, ADLS_Store_Path)"
+				],
+				"execution_count": 39
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"import zipfile\r\n",
+					"with zipfile.ZipFile(\"abfss://users@2022dsidatalake.dfs.core.windows.net/user/trusted-service-user/user/tweet.zip\", 'r') as zipObj:\r\n",
+					"   # Extract all the contents of zip file in current directory\r\n",
+					"   zipObj.extractall()"
+				],
+				"execution_count": 47
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"fsspec.u"
+				],
+				"execution_count": null
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"from pyunpack import Archive\r\n",
 					"tweetfile = 'abfss://users@2022dsidatalake.dfs.core.windows.net/synapse/workspaces/2022-dsi-synapse-ws/warehouse/model_sample/loaded_capture_twitter_10M.zip'\r\n",
+					"Archive(tweetfile).extractall('tweetfile')"
+				],
+				"execution_count": 34
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"\r\n",
 					"patoolib.extract_archive(tweetfile, outdir=\"tweetfile\")"
 				],
 				"execution_count": null
